@@ -1,0 +1,33 @@
+@font-face{
+  font-family:Nunito;
+  src:url("../assets/fonts/nunito.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Nunito;
+  font-style: normal;
+  text-decoration: none;
+  letter-spacing: 0.5;
+}
+
+body {
+   -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+#drag-region {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  cursor: grab;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
