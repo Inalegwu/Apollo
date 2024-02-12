@@ -1,0 +1,17 @@
+type: 'application'
+language: 'typescript'
+
+project:
+  name : 'Apollo'
+  description : 'Cross-Platform File Sharing Mobile Client'
+  owner: 'IkwueInalegwu'
+
+tasks:
+  # run Apollo Mobile in dev mode
+  dev:
+    command : 'pnpm start'
+    inputs :
+      - 'src/**/*'
+  # install all deps from package.json
+  install:
+    command : 'pnpm install'
