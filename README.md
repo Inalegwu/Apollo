@@ -35,6 +35,5 @@ The entire repository , is a monorepo managed using [Moonrepo](https://moonrepo.
 #### Contributing to Apollo
 Contributions will be welcome to Apollo when it has come out of its' early days of development and is working towards a release.<br>
 *Why ?* You may ask , well I need to know what people are thinking before I can let them contribute , which means I need to know that you've used the app and encountered an Issue and this can only be done when the app is at least in alpha.<br><br>
-```
-    *Contributors must first be users*
-```
+
+*Contributors must first be users*
