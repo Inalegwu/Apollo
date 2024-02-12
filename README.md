@@ -2,9 +2,11 @@
 #### cross-platform file sharing for everybody
 <br>
 <br>
-`
+
+```
     🚧 Apollo is currently a work in progress
-`
+```
+
 <br>
 <br>
 
@@ -16,12 +18,23 @@ Apollo , was born more out of interest than of necessity to be frank.Apollo the 
 
 ## The Engine Room
 #### How is Apollo being built.
-Apollo is an primary an electron app built using the [Electrostatic Stack](https://github.com/Inalegwu/ElectroStatic), a bespoke stack for building electron apps quickly using some of the best tools in the Ecosystem
-And a React Native app built using Expo and other React Native Libraries
+Apollo consists of two parts , The desktop/PC Client and the mobile client
+
+Apollo desktop is an Electron app built using the [Electrostatic Stack](https://github.com/Inalegwu/ElectroStatic), a bespoke stack for building electron apps quickly using some of the best tools in the ecosystem to increase speed of feature delivery and general developer happiness
+<br><br>
+Apollo Mobile , is a React Native app built using the best tools in the React Native ecosystem to also help speed of feature delivery and general developer happiness.
+<br><br>
+I'm a strong believer in uing the tools you know to achieve the things you want to , when you need speed
+As much as I would have loved to used Tauri to do this or Flutter or Nativescript , these are the tools I use in my everyday development both for work and in other personal projects and I don't see a need to abandon them just yet ,especially when I'm trying to build something quickly.
+<br><br>
+The entire repository , is a monorepo managed using [Moonrepo](https://moonrepo.dev) , a new monorepo tool built using Rust. I chose it because it allowed me to define a lot of the things I needed myself , whereas tools like Turborepo just spat out a bunch of folders for me which I don't generally enjoy.This repository originally was two separate projects with separate git histories but I managed to assimilate them into this
+
 <br>
 
 
 #### Contributing to Apollo
 Contributions will be welcome to Apollo when it has come out of its' early days of development and is working towards a release.<br>
-Why ? You may ask , well I need to know what people are thinking before I can let them contribute , which means I need to know that you've used the app and encountered an Issue and this can only be done when the app is at least in alpha.<br><br>
-*Contributors must first be users*
+*Why ?* You may ask , well I need to know what people are thinking before I can let them contribute , which means I need to know that you've used the app and encountered an Issue and this can only be done when the app is at least in alpha.<br><br>
+```
+    *Contributors must first be users*
+```
