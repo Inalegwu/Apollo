@@ -1,0 +1,9 @@
+{
+	"name": "Apollo",
+	"version": "0.0.1",
+	"description": "Apollo Cross-Platform File Transfer Suite",
+	"author": "Ikwue Inalegwu",
+	"license": "MIT",
+	"private": true,
+	"workspaces": ["apps/desktop", "packages/state", "packages/types"]
+}

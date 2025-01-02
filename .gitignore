@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+dist
+release
+node_modules
+.drizzle
+out
+*.vite.config.*.mjs
+*.gen.ts
+*.txt
+*.md
+.fleet

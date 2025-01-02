@@ -1,0 +1,13 @@
+{
+	"name": "@apollo/types",
+	"version": "0.1.0",
+	"description": "apollo suite shared types",
+	"main": "src/index.ts",
+	"license": "MIT",
+	"scripts": {
+		"build": "tsc -b"
+	},
+	"devDependencies": {
+		"typescript": "^5.7.2"
+	}
+}
