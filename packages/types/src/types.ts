@@ -36,3 +36,16 @@ export type TransferState = {
     selectedFiles: Set<string>;
     addToSelectedFiles: (filePath: string) => void;
 };
+
+export type Transfer = Readonly<{
+    id: string;
+    fileName: string;
+    destinationDeviceName: string;
+    destinationDeviceId: string;
+}>;
+
+export type Session = Readonly<{
+    id: string;
+    nodeName: string;
+    nodeKeychainID: string;
+}>;

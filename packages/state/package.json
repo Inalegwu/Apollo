@@ -1,17 +1,17 @@
 {
-	"name": "@apollo/state",
-	"version": "0.1.0",
-	"description": "apollo suite state management",
-	"main": "src/index.ts",
-	"license": "MIT",
-	"scripts": {
-		"build": "tsc -b"
-	},
-	"dependencies": {
-		"zustand": "^5.0.2"
-	},
-	"devDependencies": {
-		"typescript": "^5.7.2",
-		"@apollo/types": "^0.1.0"
-	}
+  "name": "@apollo/state",
+  "version": "0.1.0",
+  "description": "apollo suite state management",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@apollo/types": "^0.1.0"
+  }
 }
