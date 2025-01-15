@@ -47,4 +47,3 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
-bun.lockb
