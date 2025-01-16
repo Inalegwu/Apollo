@@ -1,4 +1,11 @@
-import type { AppState, Node, PeerState, TransferState } from "@apollo/types";
+import type {
+    AppState,
+    HistoryState,
+    Node,
+    PeerState,
+    Transfer,
+    TransferState,
+} from "@apollo/types";
 import { create } from "zustand";
 import { persist, type PersistStorage } from "zustand/middleware";
 
@@ -95,5 +102,38 @@ export const coreTransferState = (storage?: PersistStorage<unknown>) =>
             }),
     }), {
         name: "transfer-state",
+        storage,
+    }));
+
+export const coreHistoryState = (storage?: PersistStorage<unknown>) =>
+    create<HistoryState>()(persist((set) => ({
+        filterBy: "newest",
+        history: new Set<Transfer>(),
+        setFilterBy: (filterBy) => set((state) => ({ ...state, filterBy })),
+        addToHistory: (transfer) =>
+            set((state) => {
+                if (state.history.has(transfer)) {
+                    return state;
+                }
+
+                state.history.add(transfer);
+
+                return state;
+            }),
+        clearHistory: () =>
+            set((state) => {
+                state.history.clear();
+                return state;
+            }),
+        removeFromHistory: (transfer) =>
+            set((state) => {
+                if (!state.history.has(transfer)) return state;
+
+                state.history.delete(transfer);
+
+                return state;
+            }),
+    }), {
+        name: "history-state",
         storage,
     }));

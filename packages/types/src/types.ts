@@ -49,3 +49,14 @@ export type Session = Readonly<{
     nodeName: string;
     nodeKeychainID: string;
 }>;
+
+export type FilterBy = "newest" | "oldest" | "search";
+
+export type HistoryState = {
+    filterBy: FilterBy;
+    history: Set<Transfer>;
+    setFilterBy: (filterby: FilterBy) => void;
+    addToHistory: (transfer: Transfer) => void;
+    removeFromHistory: (transfer: Transfer) => void;
+    clearHistory: () => void;
+};
