@@ -1,10 +1,16 @@
 import {
   coreAppState,
+  coreHistoryState,
   corePeerState,
   coreTransferState,
+  createJSONStorage,
   makeSelectors,
 } from "@apollo/state";
+import { AsyncStorage } from "@react-native-async-storage/async-storage";
 
-export const appState = makeSelectors(coreAppState());
-export const peers = makeSelectors(corePeerState());
-export const transfers = makeSelectors(coreTransferState());
+const storage = createJSONStorage(() => AsyncStorage);
+
+export const appState = makeSelectors(coreAppState(storage));
+export const peers = makeSelectors(corePeerState(storage));
+export const transfers = makeSelectors(coreTransferState(storage));
+export const history = makeSelectors(coreHistoryState(storage));
