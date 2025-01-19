@@ -52,22 +52,22 @@ export const coreAppState = (storage?: PersistStorage<unknown>) =>
 export const corePeerState = (storage?: PersistStorage<unknown>) =>
     create<PeerState>()(persist((set) => ({
         neighbors: new Map<string, Node>(),
-        favourites: new Set<Node>(),
+        favourites: new Map<string, Node>(),
         addToFavourites: (node) =>
             set((state) => {
-                if (state.favourites.has(node)) {
+                if (state.favourites.has(node.keychainId)) {
                     return state;
                 }
 
-                state.favourites.add(node);
+                state.favourites.set(node.keychainId, node);
 
                 return state;
             }),
-        removeFromFavourites: (node) =>
+        removeFromFavourites: (id) =>
             set((state) => {
-                if (!state.favourites.has(node)) return state;
+                if (!state.favourites.has(id)) return state;
 
-                state.favourites.delete(node);
+                state.favourites.delete(id);
                 return state;
             }),
         addToNeigbhors: (node) =>

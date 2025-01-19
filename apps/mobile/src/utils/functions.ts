@@ -1,3 +1,4 @@
+import { String } from "effect";
 import { PixelRatio, Platform } from "react-native";
 import { ANDROID_SCALE_LIMIT, SCALE } from "./constants";
 
@@ -6,3 +7,5 @@ export const normalize = (size: number) =>
     ? Math.round(PixelRatio.roundToNearestPixel(size * SCALE))
     : Math.round(PixelRatio.roundToNearestPixel(size * SCALE)) -
       ANDROID_SCALE_LIMIT;
+
+export const capitalize = (value: string) => String.capitalize(value);

@@ -11,7 +11,13 @@ type Props = BoxProps<Theme> & {
 
 export default function Container(props: Props) {
   return (
-    <Box backgroundColor="black" flex={1} {...props}>
+    <Box
+      backgroundColor="black"
+      alignItems="center"
+      justifyContent="center"
+      flex={1}
+      {...props}
+    >
       {props.children}
     </Box>
   );

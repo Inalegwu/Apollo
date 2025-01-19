@@ -25,9 +25,9 @@ export type Node = {
 
 export type PeerState = {
     neighbors: Map<string, Node>;
-    favourites: Set<Node>;
+    favourites: Map<string, Node>;
     addToFavourites: (node: Node) => void;
-    removeFromFavourites: (node: Node) => void;
+    removeFromFavourites: (id: string) => void;
     addToNeigbhors: (node: Node) => void;
     removeFromNeighbors: (id: string) => void;
 };
