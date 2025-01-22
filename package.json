@@ -2,7 +2,10 @@
   "name": "Apollo",
   "version": "0.0.1",
   "description": "Apollo Cross-Platform File Transfer Suite",
-  "author": "Ikwue Inalegwu",
+  "author": {
+    "email": "disgruntleddev@outlook.com",
+    "name": "DisgruntledDev"
+  },
   "license": "MIT",
   "private": true,
   "workspaces": [

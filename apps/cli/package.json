@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "author": "Ikwue Inalegwu",
   "license": "MIT",
+  "scripts":{},
   "devDependencies": {
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
