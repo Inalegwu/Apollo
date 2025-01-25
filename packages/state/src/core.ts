@@ -1,13 +1,13 @@
 import type {
     AppState,
     HistoryState,
-    Node,
     PeerState,
     Transfer,
     TransferState,
 } from "@apollo/types";
 import { create } from "zustand";
-import { persist, type PersistStorage } from "zustand/middleware";
+import type { PersistStorage } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 export const coreAppState = (storage?: PersistStorage<unknown>) =>
     create<AppState>()(
@@ -51,55 +51,58 @@ export const coreAppState = (storage?: PersistStorage<unknown>) =>
 
 export const corePeerState = (storage?: PersistStorage<unknown>) =>
     create<PeerState>()(persist((set) => ({
-        neighbors: new Map<string, Node>(),
-        favourites: new Map<string, Node>(),
+        neighbors: [],
+        favourites: [],
         addToFavourites: (node) =>
-            set((state) => {
-                if (state.favourites.has(node.keychainId)) {
-                    return state;
-                }
-
-                state.favourites.set(node.keychainId, node);
-
-                return state;
-            }),
+            set((state) => ({
+                ...state,
+                neighbors: state.neighbors.filter((ex) =>
+                    ex.keychainId === node.keychainId
+                ),
+                favourites: state.favourites.includes(node)
+                    ? state.favourites
+                    : [...state.favourites, node],
+            })),
         removeFromFavourites: (id) =>
-            set((state) => {
-                if (!state.favourites.has(id)) return state;
-
-                state.favourites.delete(id);
-                return state;
-            }),
+            set((state) => ({
+                ...state,
+                favourites: state.favourites.filter((node) =>
+                    node.keychainId !== id
+                ),
+            })),
         addToNeigbhors: (node) =>
-            set((state) => {
-                if (state.neighbors.has(node.keychainId)) {
-                    return state;
-                }
-                state.neighbors.set(node.keychainId, node);
-                return state;
-            }),
+            set((state) => ({
+                ...state,
+                neighbors: state.neighbors.includes(node)
+                    ? state.neighbors
+                    : [...state.neighbors, node],
+            })),
         removeFromNeighbors: (id) =>
-            set((state) => {
-                if (!state.neighbors.has(id)) return state;
-                state.neighbors.delete(id);
-
-                return state;
-            }),
+            set((state) => ({
+                ...state,
+                neighbors: state.neighbors.filter((node) =>
+                    node.keychainId !== id
+                ),
+            })),
     }), { name: "peer-state", storage }));
 
 export const coreTransferState = (storage?: PersistStorage<unknown>) =>
     create<TransferState>()(persist((set) => ({
-        selectedFiles: new Set<string>(),
+        selectedFiles: [],
         addToSelectedFiles: (filePath) =>
-            set((state) => {
-                if (state.selectedFiles.has(filePath)) {
-                    return state;
-                }
-
-                state.selectedFiles.add(filePath);
-
-                return state;
-            }),
+            set((state) => ({
+                ...state,
+                selectedFiles: state.selectedFiles.includes(filePath)
+                    ? state.selectedFiles
+                    : [...state.selectedFiles, filePath],
+            })),
+        removeFromSelectedFiles: (filePath) =>
+            set((state) => ({
+                ...state,
+                selectedFiles: state.selectedFiles.filter((path) =>
+                    path !== filePath
+                ),
+            })),
     }), {
         name: "transfer-state",
         storage,

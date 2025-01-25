@@ -24,8 +24,8 @@ export type Node = {
 };
 
 export type PeerState = {
-    neighbors: Map<string, Node>;
-    favourites: Map<string, Node>;
+    neighbors: ReadonlyArray<Node>;
+    favourites: ReadonlyArray<Node>;
     addToFavourites: (node: Node) => void;
     removeFromFavourites: (id: string) => void;
     addToNeigbhors: (node: Node) => void;
@@ -33,8 +33,9 @@ export type PeerState = {
 };
 
 export type TransferState = {
-    selectedFiles: Set<string>;
+    selectedFiles: ReadonlyArray<string>;
     addToSelectedFiles: (filePath: string) => void;
+    removeFromSelectedFiles: (path: string) => void;
 };
 
 export type Transfer = Readonly<{
