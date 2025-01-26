@@ -12,6 +12,7 @@
     "apps/desktop",
     "packages/state",
     "packages/types",
+    "packages/bonjour",
     "apps/mobile"
   ]
 }
