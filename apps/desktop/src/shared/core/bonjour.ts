@@ -1,11 +1,14 @@
 import bonjour, { type ServiceOptions } from "bonjour";
-import { Console, Context, Effect, Layer } from "effect";
-import { BonjourError } from "./error";
+import { Console, Context, Data, Effect, Layer } from "effect";
+
+class BonjourError extends Data.TaggedError("bonjour-error")<{
+    cause: unknown;
+}> {}
 
 const make = Effect.gen(function* () {
     const instance = yield* Effect.acquireRelease(
         Effect.succeed(bonjour()),
-        (_) => Effect.succeed(() => _.destroy()),
+        (_) => Effect.succeed(_.destroy()),
     );
 
     const advertise = (
@@ -35,16 +38,10 @@ const make = Effect.gen(function* () {
         catch: (cause) => new BonjourError({ cause }),
     });
 
-    const stop = () =>
-        Effect.try({
-            try: () => instance.destroy(),
-            catch: (cause) => new BonjourError({ cause }),
-        });
-
-    return { instance, advertise, discover, stop } as const;
+    return { advertise, discover, stop } as const;
 });
 
-export class Bonjour extends Context.Tag("@apollo/cli/bonjour")<
+export class Bonjour extends Context.Tag("bonjour-client")<
     Bonjour,
     Effect.Effect.Success<typeof make>
 >() {

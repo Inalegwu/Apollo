@@ -2,6 +2,7 @@ import { Bonjour } from "@apollo/bonjour";
 import { Console, Effect, Layer } from "effect";
 
 const make = Effect.gen(function* () {
+    yield* Effect.logInfo("discover");
     const bonjour = yield* Bonjour;
 
     yield* Effect.forever(bonjour.discover("http"));

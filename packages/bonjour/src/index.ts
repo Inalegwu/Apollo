@@ -1,3 +1,1 @@
-import { Bonjour } from "./bonjour/client";
-
-export { Bonjour };
+export * from "./bonjour";

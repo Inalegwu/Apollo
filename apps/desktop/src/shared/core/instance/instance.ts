@@ -1,5 +1,5 @@
-import { Bonjour } from "@apollo/bonjour";
 import { Console, Effect, Layer } from "effect";
+import { Bonjour } from "../bonjour";
 
 const make = Effect.gen(function* () {
     const bonjour = yield* Bonjour;
@@ -8,7 +8,7 @@ const make = Effect.gen(function* () {
         bonjour.advertise("apollo-cli-client-1", 42060, "http"),
     );
 }).pipe(
-    Effect.catchAll((e) => Console.error(e)),
+    Effect.catchAll((e) => Console.error(e.cause)),
     Effect.annotateLogs({
         module: "advertise",
     }),
