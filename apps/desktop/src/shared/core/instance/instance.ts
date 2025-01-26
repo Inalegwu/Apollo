@@ -14,7 +14,7 @@ const make = Effect.gen(function* () {
     }),
 );
 
-export const Advertise = {
+export const Instance = {
     Live: Layer.scopedDiscard(make).pipe(
         Layer.provide(Bonjour.layer),
     ),

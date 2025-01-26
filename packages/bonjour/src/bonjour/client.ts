@@ -3,8 +3,9 @@ import { Console, Context, Effect, Layer } from "effect";
 import { BonjourError } from "./error";
 
 const make = Effect.gen(function* () {
-    const bonjourInstance = yield* Effect.succeed(
-        bonjour(),
+    const instance = yield* Effect.acquireRelease(
+        Effect.succeed(bonjour()),
+        (_) => Effect.succeed(() => _.destroy()),
     );
 
     const advertise = (
@@ -14,7 +15,7 @@ const make = Effect.gen(function* () {
         protocol: ServiceOptions["protocol"] = "udp",
     ) => Effect.try({
         try: () =>
-            bonjourInstance.publish({
+            instance.publish({
                 name: serviceName,
                 type,
                 protocol,
@@ -28,7 +29,7 @@ const make = Effect.gen(function* () {
         protocol: ServiceOptions["protocol"] = "udp",
     ) => Effect.try({
         try: () =>
-            bonjourInstance.find({ type, protocol }, (service) => {
+            instance.find({ type, protocol }, (service) => {
                 Console.log(service);
             }),
         catch: (cause) => new BonjourError({ cause }),
@@ -36,16 +37,16 @@ const make = Effect.gen(function* () {
 
     const stop = () =>
         Effect.try({
-            try: () => bonjourInstance.destroy(),
+            try: () => instance.destroy(),
             catch: (cause) => new BonjourError({ cause }),
         });
 
-    return { advertise, discover, stop } as const;
+    return { instance, advertise, discover, stop } as const;
 });
 
 export class Bonjour extends Context.Tag("@apollo/cli/bonjour")<
     Bonjour,
     Effect.Effect.Success<typeof make>
 >() {
-    static layer = Layer.effect(this, make);
+    static layer = Layer.scoped(this, make);
 }

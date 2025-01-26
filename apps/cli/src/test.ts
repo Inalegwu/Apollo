@@ -1,13 +1,13 @@
+import { Bonjour } from "@apollo/bonjour";
 import { Console, Effect } from "effect";
-import { Bonjour } from "./bonjour/client";
 
 const program = Effect.gen(function* () {
     yield* Effect.logInfo("starting test");
-    const bon = yield* Bonjour;
+    const _ = yield* Bonjour;
 
     yield* Effect.logInfo("attempting to discover");
 
-    yield* Effect.forever(bon.discover("http"));
+    yield* Effect.forever(_.discover("http"));
 }).pipe(
     Effect.provide(Bonjour.layer),
     Effect.catchAll((e) => Console.error(e)),

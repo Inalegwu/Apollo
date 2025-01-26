@@ -12,9 +12,9 @@
     "biome:lint": "pnpx @biomejs/biome lint ./src --apply"
   },
   "dependencies": {
+    "@apollo/bonjour": "^0.1.0",
     "@apollo/state": "^0.1.0",
     "@apollo/types": "^0.1.0",
-    "@apollo/bonjour":"^0.1.0",
     "@effect/platform": "^0.71.3",
     "@effect/platform-node": "^0.66.3",
     "@electron/rebuild": "^3.4.1",
@@ -27,7 +27,7 @@
     "@trpc/server": "^10.44.1",
     "bonjour": "^3.5.0",
     "broadcast-channel": "^7.0.0",
-    "effect": "^3.11.7",
+    "effect": "^3.12.7",
     "electron-trpc": "^0.5.2",
     "lucide-react": "^0.379.0",
     "motion": "^11.15.0",

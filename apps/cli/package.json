@@ -17,6 +17,7 @@
   "dependencies": {
     "@effect/platform": "^0.75.1",
     "@effect/platform-node": "^0.71.1",
+    "@apollo/bonjour": "^0.1.0",
     "bonjour": "^3.5.0",
     "effect": "^3.12.7"
   }

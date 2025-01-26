@@ -1,13 +1,10 @@
+import { Bonjour } from "@apollo/bonjour";
 import { Console, Effect, Layer } from "effect";
-import { Bonjour } from "../bonjour/client";
 
 const make = Effect.gen(function* () {
     const bonjour = yield* Bonjour;
 
-    // yield* Effect.forkScoped(
-    //     bonjour.discover("http"),
-    // );
-    yield* bonjour.discover("http");
+    yield* Effect.forever(bonjour.discover("http"));
 }).pipe(
     Effect.catchAll((e) => Console.error(e)),
     Effect.annotateLogs({

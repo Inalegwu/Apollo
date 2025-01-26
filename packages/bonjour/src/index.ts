@@ -1,2 +1,3 @@
-export * from "./bonjour/client";
-export * from "./bonjour/error";
+import { Bonjour } from "./bonjour/client";
+
+export { Bonjour };
