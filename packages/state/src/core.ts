@@ -66,9 +66,11 @@ export const corePeerState = (storage?: PersistStorage<unknown>) =>
         removeFromFavourites: (id) =>
             set((state) => ({
                 ...state,
-                favourites: state.favourites.filter((node) =>
-                    node.keychainId !== id
-                ),
+                favourites: [
+                    ...state.favourites.filter((node) =>
+                        node.keychainId !== id
+                    ),
+                ],
             })),
         addToNeigbhors: (node) =>
             set((state) => ({
@@ -80,9 +82,9 @@ export const corePeerState = (storage?: PersistStorage<unknown>) =>
         removeFromNeighbors: (id) =>
             set((state) => ({
                 ...state,
-                neighbors: state.neighbors.filter((node) =>
-                    node.keychainId !== id
-                ),
+                neighbors: [
+                    ...state.neighbors.filter((node) => node.keychainId !== id),
+                ],
             })),
     }), { name: "peer-state", storage }));
 
@@ -99,9 +101,9 @@ export const coreTransferState = (storage?: PersistStorage<unknown>) =>
         removeFromSelectedFiles: (filePath) =>
             set((state) => ({
                 ...state,
-                selectedFiles: state.selectedFiles.filter((path) =>
-                    path !== filePath
-                ),
+                selectedFiles: [
+                    ...state.selectedFiles.filter((path) => path !== filePath),
+                ],
             })),
     }), {
         name: "transfer-state",

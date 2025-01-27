@@ -21,5 +21,5 @@ export const peers = makeSelectors(
 );
 
 export const history = makeSelectors(
-    coreHistoryState(localStorage),
+    coreHistoryState(sessionStorage),
 );

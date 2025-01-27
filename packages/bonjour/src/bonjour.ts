@@ -38,13 +38,13 @@ const make = Effect.gen(function* () {
         catch: (cause) => new BonjourError({ cause }),
     });
 
-    const stop = () =>
-        Effect.try({
-            try: () => instance.destroy(),
-            catch: (cause) => new BonjourError({ cause }),
-        });
+    // const stop = () =>
+    //     Effect.try({
+    //         try: () => instance.destroy(),
+    //         catch: (cause) => new BonjourError({ cause }),
+    //     });
 
-    return { instance, advertise, discover, stop } as const;
+    return { instance, advertise, discover } as const;
 });
 
 export class Bonjour extends Context.Tag("@apollo/cli/bonjour")<

@@ -6,7 +6,7 @@ const make = Effect.gen(function* () {
     const bonjour = yield* Bonjour;
 
     yield* Effect.forever(
-        bonjour.advertise("apollo-cli-client-1", 42060, "http"),
+        bonjour.advertise("apollo-cli-client", 42060, "http"),
     );
 }).pipe(
     Effect.catchAll((e) => Console.error(e)),

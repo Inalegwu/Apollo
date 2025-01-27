@@ -1,14 +1,14 @@
 import bonjour, { type ServiceOptions } from "bonjour";
 import { Console, Context, Data, Effect, Layer } from "effect";
 
-class BonjourError extends Data.TaggedError("bonjour-error")<{
+export class BonjourError extends Data.TaggedError("bonjour-error")<{
     cause: unknown;
 }> {}
 
 const make = Effect.gen(function* () {
     const instance = yield* Effect.acquireRelease(
         Effect.succeed(bonjour()),
-        (_) => Effect.succeed(_.destroy()),
+        (_) => Effect.succeed(() => _.destroy()),
     );
 
     const advertise = (
@@ -17,13 +17,15 @@ const make = Effect.gen(function* () {
         type: string,
         protocol: ServiceOptions["protocol"] = "udp",
     ) => Effect.try({
-        try: () =>
-            instance.publish({
+        try: () => {
+            Console.log(`Publishing ad for ${serviceName}:${type}, ${port}`);
+            return instance.publish({
                 name: serviceName,
                 type,
                 protocol,
                 port,
-            }),
+            });
+        },
         catch: (cause) => new BonjourError({ cause }),
     });
 
@@ -38,10 +40,10 @@ const make = Effect.gen(function* () {
         catch: (cause) => new BonjourError({ cause }),
     });
 
-    return { advertise, discover, stop } as const;
+    return { instance, advertise, discover } as const;
 });
 
-export class Bonjour extends Context.Tag("bonjour-client")<
+export class Bonjour extends Context.Tag("@apollo/cli/bonjour")<
     Bonjour,
     Effect.Effect.Success<typeof make>
 >() {
