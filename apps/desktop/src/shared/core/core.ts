@@ -1,7 +1,6 @@
+import { Console, Effect } from "effect";
 import { parentPort } from "node:worker_threads";
-import { Effect } from "effect";
 import { Bonjour } from "./bonjour";
-// import { InstanceService } from "./instance/service";
 
 const port = parentPort;
 
@@ -11,22 +10,18 @@ const program = Effect.gen(function* () {
     yield* Effect.logInfo("Starting desktop bonjour instance");
     const bon = yield* Bonjour;
 
-    yield* 
-        bon.advertise("apollo-desktop-client", 42069, "http");
-    
+    yield* Effect.fork(Effect.gen(function* () {
+        yield* bon.advertise("apollo-desktop-client", 42069, "http").pipe(
+            Effect.tap((m) => Console.log(m)),
+        );
 
-    yield* bon.discover("http");
+        yield* bon.advertise("apollo-desktop-client", 42069, "http").pipe(
+            Effect.tap((m) => Console.log(m)),
+        );
+    })).pipe(Effect.forever);
 }).pipe(Effect.provide(Bonjour.layer));
-
-// const App = Layer.mergeAll(InstanceService).pipe(
-//     Layer.provide(NodeContext.layer),
-// );
 
 port.on(
     "message",
     () => Effect.runSync(program),
 );
-
-// NodeRuntime.runMain(
-//     Layer.launch(InstanceService),
-// ),
