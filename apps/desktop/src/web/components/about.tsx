@@ -19,7 +19,7 @@ export default function About() {
         size="2"
         aria-description="About Apollo"
         aria-describedby="dialog"
-        className="bg-moonlightFocusLow"
+        className="bg-moonlightWhite dark:bg-moonlightFocusLow"
       >
         <Flex direction="column" align="start" gap="2">
           <Flex align="center" className="w-full" justify="end">
@@ -35,11 +35,19 @@ export default function About() {
           </Flex>
           <Flex direction="column" gap="2" align="start">
             <Dialog.Title>
-              <Heading className="text-moonlightWhite" weight="bold" size="5">
+              <Heading
+                className="text-moonlightFocusLow dark:text-moonlightWhite"
+                weight="bold"
+                size="5"
+              >
                 About
               </Heading>
             </Dialog.Title>
-            <Text size="2" className="text-moonlightWhite" weight="medium">
+            <Text
+              size="2"
+              className="text-moonlightFocusLow dark:text-moonlightWhite"
+              weight="medium"
+            >
               Apollo is a product of{" "}
               <Text size="2" weight="medium" className="text-moonlightIndigo">
                 DisgruntledDevs
@@ -52,13 +60,21 @@ export default function About() {
               users, <span className="font-bold">Securely</span> and{" "}
               <span className="font-bold">Locally</span> on all devices.
             </Text>
-            <Text size="2" className="text-moonlightWhite" weight="medium">
+            <Text
+              size="2"
+              className="text-moonlightFocusLow dark:text-moonlightWhite"
+              weight="medium"
+            >
               Apollo is a completely private and local-first application. None
               of your information ever leaves your device and user accounts
               aren't necessary.
             </Text>
             <Flex align="start" direction="column">
-              <Text className="text-moonlightWhite" size="2" weight="medium">
+              <Text
+                className="text-moonlightFocusLow dark:text-moonlightWhite"
+                size="2"
+                weight="medium"
+              >
                 For more information, visit us{" "}
                 <Link href="https://google.com">
                   <Text
