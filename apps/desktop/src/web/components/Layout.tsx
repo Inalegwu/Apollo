@@ -1,6 +1,6 @@
 import { Button, Flex } from "@radix-ui/themes";
-import { appState, transfers } from "@shared/state";
 import t from "@src/shared/config";
+import { appState, transfers } from "@src/shared/state";
 import { AnimatePresence } from "motion/react";
 import type React from "react";
 import { useEffect, useState } from "react";

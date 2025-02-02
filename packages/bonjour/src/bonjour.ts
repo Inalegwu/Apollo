@@ -33,18 +33,19 @@ const make = Effect.gen(function* () {
     ) => Effect.try({
         try: () =>
             instance.find({ type, protocol }, (service) => {
-                Console.log(service);
+                Console.info(`Bonjour Core found ${service.name}`);
+                return service;
             }),
         catch: (cause) => new BonjourError({ cause }),
     });
 
-    // const stop = () =>
-    //     Effect.try({
-    //         try: () => instance.destroy(),
-    //         catch: (cause) => new BonjourError({ cause }),
-    //     });
+    const use = <A>(fn: (instance: bonjour.Bonjour) => Promise<A>) =>
+        Effect.tryPromise({
+            try: () => fn(instance),
+            catch: (cause) => new BonjourError({ cause }),
+        });
 
-    return { instance, advertise, discover } as const;
+    return { instance, advertise, discover, use } as const;
 });
 
 export class Bonjour extends Context.Tag("@apollo/cli/bonjour")<

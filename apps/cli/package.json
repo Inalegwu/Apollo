@@ -6,8 +6,8 @@
   "author": "Ikwue Inalegwu",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx src/main.ts",
-    "test": "tsx src/test.ts"
+    "dev": "tsx --watch src/main.ts",
+    "build": "tsc -b"
   },
   "devDependencies": {
     "@types/bonjour": "^3.5.13",
