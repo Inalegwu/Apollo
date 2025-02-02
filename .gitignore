@@ -8,7 +8,6 @@ out
 *.vite.config.*.mjs
 *.gen.ts
 *.txt
-*.md
 .fleet
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 

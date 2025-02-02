@@ -1,5 +1,5 @@
 import { Bonjour } from "@apollo/bonjour";
-import { Console, Effect } from "effect";
+import { Console, Duration, Effect } from "effect";
 
 const make = Effect.gen(function* () {
     yield* Effect.logInfo("Starting CLI Apollo Instance");
@@ -24,7 +24,13 @@ const make = Effect.gen(function* () {
     //     Effect.andThen((_) => _.start()),
     //     Effect.forever,
     // );
-    yield* Effect.all([advertise, discover]).pipe();
+    yield* Effect.all([advertise, discover]).pipe(
+        Effect.timed,
+        Effect.tap((duration) =>
+            Console.log(`Total Time ${Duration.format(duration[0])}`)
+        ),
+        Effect.orDie,
+    );
 }).pipe(
     Effect.catchAll((e) => Console.error(e)),
     Effect.provide(Bonjour.layer),
