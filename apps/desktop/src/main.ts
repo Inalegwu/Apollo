@@ -40,7 +40,7 @@ const createWindow = () => {
     mainWindow.loadFile(join(__dirname, "../renderer/index.html"));
   }
 
-  coreWorker({ name: "apollo_core" }).postMessage({
+  coreWorker({ name: "apollo-desktop-client" }).postMessage({
     start: true,
   });
 

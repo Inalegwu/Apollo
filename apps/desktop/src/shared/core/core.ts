@@ -1,4 +1,4 @@
-import { Console, Effect } from "effect";
+import { Console, Duration, Effect } from "effect";
 import { parentPort } from "node:worker_threads";
 import { Bonjour } from "./bonjour";
 
@@ -9,13 +9,6 @@ if (!port) throw new Error("[CORE]==> CORE ERROR::NO PORT");
 const program = Effect.gen(function* () {
     yield* Effect.logInfo("Starting desktop bonjour instance");
     const bon = yield* Bonjour;
-
-    yield* bon.advertise("apollo-desktop-client", 42069, "http").pipe(
-        Effect.tap((m) =>
-            Console.info(`Advertising ${m.name}:${m.port} on ${m.host}`)
-        ),
-        Effect.andThen((_) => _.start()),
-    );
 
     const advertise = bon.advertise("apollo-desktop-client", 42069, "http")
         .pipe(
@@ -28,7 +21,6 @@ const program = Effect.gen(function* () {
     const discover = bon.discover("http").pipe(
         Effect.tap((_) => Console.log(`Discovered ${_.services}`)),
         Effect.andThen((service) => service.start()),
-        Effect.timed,
     );
 
     yield* Effect.all([advertise, discover], {
@@ -37,6 +29,11 @@ const program = Effect.gen(function* () {
         Effect.orDie,
     );
 }).pipe(
+    Effect.timed,
+    Effect.tap(([duration]) =>
+        Console.info(`~ Total Time ${Duration.format(duration)}`)
+    ),
+    Effect.catchAll(Effect.die),
     Effect.provide(Bonjour.layer),
     Effect.annotateLogs({
         instance: "apollo-desktop",

@@ -1,5 +1,5 @@
 import type { FilterBy } from "@apollo/types";
-import { Flex, Select, Text } from "@radix-ui/themes";
+import { Flex, Select, Text, TextField } from "@radix-ui/themes";
 import { history } from "@src/shared/state";
 import { Array } from "effect";
 import { capitalize } from "effect/String";
@@ -74,9 +74,19 @@ export default function History({ toggleHistory }: Props) {
               <Text size="1" color="gray">
                 {capitalize(filter.toString())}
               </Text>
+              {filter === "search" && (
+                <TextField.Root>
+                  <TextField.Input
+                    size="1"
+                    variant="surface"
+                    placeholder="Find Transfer"
+                    onChange={(e) => console.log(e.currentTarget.value)}
+                  />
+                </TextField.Root>
+              )}
             </div>
           )}
-          renderItem={({ data, index }) => <div key={index} />}
+          renderItem={({ item, index }) => <div key={index} />}
         />
       </Flex>
     </motion.div>

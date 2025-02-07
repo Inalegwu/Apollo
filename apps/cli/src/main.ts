@@ -20,18 +20,14 @@ const make = Effect.gen(function* () {
         Effect.andThen((_) => _.start()),
     );
 
-    // yield* bonjour.discover("http").pipe(
-    //     Effect.andThen((_) => _.start()),
-    //     Effect.forever,
-    // );
     yield* Effect.all([advertise, discover]).pipe(
-        Effect.timed,
-        Effect.tap((duration) =>
-            Console.log(`Total Time ${Duration.format(duration[0])}`)
-        ),
         Effect.orDie,
     );
 }).pipe(
+    Effect.timed,
+    Effect.tap((duration) =>
+        Console.log(`~ Total Time ${Duration.format(duration[0])}`)
+    ),
     Effect.catchAll((e) => Console.error(e)),
     Effect.provide(Bonjour.layer),
     Effect.annotateLogs({
